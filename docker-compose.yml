@@ -1,0 +1,8 @@
+services:
+  stardew-tracker:
+    build: .
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - UPLOAD_MODE=1
+    restart: unless-stopped

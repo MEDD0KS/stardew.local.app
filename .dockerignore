@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+dist
+.turbo
+.git
+.gitignore
+.env*
+*.md
+LICENSE
+venv
+.venv
+__pycache__
+scripts/content
+watcher
