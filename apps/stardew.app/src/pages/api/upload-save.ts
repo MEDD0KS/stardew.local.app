@@ -43,7 +43,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(500).json({ error: `Read error: ${err.message}` }),
   );
   req.on("end", () => {
-    const body = Buffer.concat(chunks);
+    const body = Buffer.concat(chunks as any);
     if (body.length === 0) {
       return res.status(400).json({ error: "Empty body" });
     }
@@ -53,7 +53,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
       }
-      fs.writeFileSync(UPLOAD_CACHE_PATH, body);
+      fs.writeFileSync(UPLOAD_CACHE_PATH, new Uint8Array(body));
       return res.json({ ok: true, size: body.length });
     } catch (err: any) {
       return res.status(500).json({ error: `Write error: ${err.message}` });
